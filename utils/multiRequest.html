@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function multiRequest (urls = [], maxNum) {
+      const len = urls.length;
+      const result = new Array(len).fill(false);
+      let count = 0;
+
+      return new Promise((resolve, reject) => {
+        while(count < maxNum) {
+          next();
+        }
+
+        function next() {
+          let cur = count++;
+          // 处理边界情况
+          if (cur >= len) {
+            !result.includes(false) && resolve(result);
+            return;
+          }
+
+          const url = urls[cur];
+          console.log(`开始第${cur + 1}个接口的请求`, new Date().toLocaleString());
+
+          fetch(url).then(res => {
+            console.log('res-------------', res.json());
+            // 保存结果
+            result[cur] = res;
+            console.log(`完成第${cur + 1}个接口的请求`, new Date().toLocaleString());
+
+            if (cur < len) {
+              next();
+            }
+          }).catch(err => {
+            result[cur] = err;
+            console.log(`完成第${cur + 1}个接口的请求`, new Date().toLocaleString());
+
+            if (cur < len) {
+              next();
+            }
+          });
+        }
+      });
+    }
+
+    // 测试
+    const url1 = 'http://193.160.57.78:9095/dashboardUser?currentPage=1&pageSize=500';
+    const url2 = 'http://193.160.57.78:9095/alarm?currentPage=1&pageSize=500';
+    const url3 = 'http://193.160.57.78:9095/plugin?currentPage=1&pageSize=500';
+    const url4 = 'http://193.160.57.78:9095/platform/enum';
+    const url5 = 'http://193.160.57.78:9095/appAuth/findPageByQuery?currentPage=1&pageSize=500';
+    const url6 = 'http://193.160.57.78:9095/app-data/findAll';
+    const url7 = 'http://193.160.57.78:9095/appAuth/findDetailPageByQuery?authId=1338318898954801152&currentPage=1&pageSize=500';
+    const url8 = 'http://193.160.57.78:9095/appAuth/detail?id=1338318898954801152';
+    const url9 = 'http://193.160.57.78:9095/appAuth/detailPath?id=1338318898954801152';
+    const url10 = 'http://193.160.57.78:9095/app-data/queryList?currentPage=1&pageSize=500';
+    const url11 = 'http://193.160.57.78:9095/meta-data/queryList?path=&currentPage=1&pageSize=500';
+    const url12 = 'http://193.160.57.78:9095/app-data/getTotal';
+    const url13 = 'http://193.160.57.78:9095/appAuth/getTotal';
+    const url14 = 'http://193.160.57.78:9095/request-log/getTotal';
+    const url15 = 'http://193.160.57.78:9095/view/getRequestInterceptTotal';
+    const url16 = 'http://193.160.57.78:9095/abnormal-behavior-log/getTotal';
+    const url17 = 'http://193.160.57.78:9095/desensitization-log/getTotal';
+    const url18 = 'http://193.160.57.78:9095/request-log/getAKTop?';
+    const url19 = 'http://193.160.57.78:9095/request-log/getPathTop?';
+    const url20 = 'http://193.160.57.78:9095/view/getAccessStatus';
+
+    const urls = [url1, url2, url3, url4, url5, url6, url7, url8, url9, url10, url11, url12, url13, url14, url15, url16, url17, url18, url19, url20];
+
+    multiRequest(urls, 3).then(res => {
+      console.log('---------------------------------------');
+      console.log(res);
+    });
+  </script>
+</body>
+</html>

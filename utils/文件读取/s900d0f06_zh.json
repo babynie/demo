@@ -1,0 +1,48 @@
+{
+  "title": "ユーザ検索・一覧表示",
+  "caption": "用户检索",
+  "formModes": {
+    "mode1": "",
+    "mode2": "模式2"
+  },
+  "formLists": {
+    "m1": "用户列表"
+  },
+  "formItems": {
+    "captionValues": {
+      "txt_user_id": "用户ID",
+      "txt_user_nm_en": "用户名 (英文)",
+      "rdo_abolished_user": "无效用户",
+      "drl_company_id": "公司名称",
+      "drl_department_id": "部门名称",
+      "drl_office_id": "办公室名称",
+      "btn_search": "检索",
+      "btn_del": "删除",
+      "btn_upd": "更新",
+      "btn_new_register": "注册",
+      "btn_collective_registration": "批量注册",
+      "btn_file_output": "文件导出",
+      "lbl_search_condition": "检索条件",
+      "lbl_user_list": "用户一览表",
+      "lbl_row_per_page": "显示件数",
+      "btn_del_cancel": "删除取消",
+      "btn_detail": "详细",
+      "lbl_previous": "向前",
+      "lbl_next": "接下来",
+      "lbl_total_records": "件数",
+      "lbl_no_data_to_show": "无搜索结果",
+      "lbl_abolish": "废止",
+      "lbl_user_id": "使用者ID",
+      "lbl_user_nm": "使用者名",
+      "lbl_company_nm": "公司名称",
+      "lbl_department_nm": "部门名称",
+      "lbl_office_nm": "事业所名称",
+      "lbl_language": "语言",
+      "lbl_email": "电子邮件"
+    },
+    "staticLabels": {
+    },
+    "placeHolders": {
+    }
+  }
+}

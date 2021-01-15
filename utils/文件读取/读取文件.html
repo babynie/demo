@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <title>读取文件</title>
+</head>
+<body>
+    <input type="file" id="fileWrap" multiple="multiple">
+    
+    <script>
+        const fileEle = document.querySelector('#fileWrap');
+        fileEle.addEventListener('change', handleFile, false);
+
+        const fileInfo = {};
+
+        function handleFile(event) {
+            const files = event.target.files;
+            if (files[0]) {
+                const file = files[0];
+
+                fileInfo.name = file.name;
+                fileInfo.title = ['label_id', 'language', 'form_id'];
+
+                const reader = new FileReader();
+                reader.readAsText(file);
+                reader.onload = loaded;
+            }
+        }
+
+        function loaded(event) {
+            const fileString = JSON.parse(event.target.result);
+            const data = fileString.formItems.captionValues;
+            jsonToCsv(data, fileInfo);
+        }
+
+        function jsonToCsv(data, fileInfo) {
+            if (!data) {
+                return;
+            }
+
+            const dataParse = typeof data === 'object' ? data : JSON.parse(data);
+
+            let table = '<table>';
+            
+            // 设置表头
+            let row = `<tr>`;
+            if (fileInfo.title) {
+                for (let i = 0; i < fileInfo.title.length; i++) {
+                    row += `<th>${fileInfo.title[i]}</th>`;
+                }
+            }
+
+            table += row + `</tr>`;
+
+            //设置表体
+            for (let data in dataParse) {
+                let row = `<tr>`;
+                row += `<td>${data}</td>`;
+                row += `<td>${dataParse[data]}</td>`;
+                row += `<td>${fileInfo.name.split('_')[0]}</td>`;
+                table += row + '</tr>';
+                row = '';
+            }
+
+            table += '</table>';
+
+            var excelFile = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:x='urn:schemas-microsoft-com:office:excel' xmlns='http://www.w3.org/TR/REC-html40'>"
+            excelFile += '<meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8">'
+            excelFile += '<meta http-equiv="content-type" content="application/vnd.ms-excel'
+            excelFile += '; charset=UTF-8">'
+            excelFile += '<head>'
+            excelFile += '<!--[if gte mso 9]>'
+            excelFile += '<xml>'
+            excelFile += '<x:ExcelWorkbook>'
+            excelFile += '<x:ExcelWorksheets>'
+            excelFile += '<x:ExcelWorksheet>'
+            excelFile += '<x:Name>'
+            excelFile += fileInfo.name.split('_')[0]
+            excelFile += '</x:Name>'
+            excelFile += '<x:WorksheetOptions>'
+            excelFile += '<x:DisplayGridlines/>'
+            excelFile += '</x:WorksheetOptions>'
+            excelFile += '</x:ExcelWorksheet>'
+            excelFile += '</x:ExcelWorksheets>'
+            excelFile += '</x:ExcelWorkbook>'
+            excelFile += '</xml>'
+            excelFile += '<![endif]-->'
+            excelFile += '</head>'
+            excelFile += '<body>'
+            excelFile += table
+            excelFile += '</body>'
+            excelFile += '</html>'
+
+            var uri = 'data:application/vnd.ms-excel;charset=utf-8,' + encodeURIComponent(excelFile)
+            var link = document.createElement('a')
+            link.href = uri
+            
+            link.style = 'visibility:hidden'
+            link.download = fileInfo.name + '.xls'
+            
+            document.body.appendChild(link)
+            link.click()
+            document.body.removeChild(link)
+        }
+    </script>
+</body>
+</html>

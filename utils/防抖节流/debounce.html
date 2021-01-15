@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>防抖节流测试</title>
+  <style>
+    .content {
+      margin: 10px auto;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <h1>防抖节流测试</h1>
+    <p>防抖：连续触发一个函数，只执行最后一次。</p>
+    <p>节流：连续触发一个函数，每隔一段时间执行一次</p>
+    <input type="text" name="" id="nameInput">
+    </div>
+  </div>
+</body>
+
+<script>
+  // 参数的函数fn不能为箭头函数，否则会改变this的指向（跟debounce()或throttle()保持一致）; timer为全局对象
+  // 防抖：1、搜索框输入进行搜索；2、表单校验；3、窗口大小resize
+  function debounce(fn, delay = 300) {
+    let timer = null;
+    return function() {
+      clearTimeout(timer);
+
+      timer = setTimeout(() => {
+        fn.call(this, arguments);
+      }, delay);
+    }
+  }
+
+  // 节流：1、搜索框搜索（联想搜索）；2、滚动加载（加载更多）
+  function throttle(fn, delay = 300) {
+    let timer = null;
+    return function() {
+      if (!timer) {
+        timer = setTimeout(() => {
+          fn.call(this, arguments);
+          timer = null;
+        }, delay);
+      }
+    }
+  }
+
+  const el = document.getElementById('nameInput');
+
+  // 应用：文字输入-请求接口的时候
+  el.addEventListener('keyup', debounce(function(event) {
+    console.log(this.value);
+    console.log(event);
+  }));
+
+  // 应用：文字输入-搜索的时候用
+  // el.addEventListener('keyup', throttle((event) => {
+  //   console.log(event[0].target.value);
+  // }));
+
+  // el.addEventListener('keyup', (event) => {
+  //   console.log(event.target.value);
+  // });
+</script>
+</html>

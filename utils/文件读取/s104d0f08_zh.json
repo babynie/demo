@@ -1,0 +1,26 @@
+{
+  "title": "バリエーション検索・選択",
+  "caption": "",
+  "formModes": {
+    "mode1": ""
+  },
+  "formLists": {
+  },
+  "formItems": {
+    "captionValues": {
+      "lbl_conf_list": "配置一览",
+      "btn_detail": "详细",
+      "lbl_previous": "向前",
+      "lbl_next": "接下来",
+      "lbl_total_records": "件数",
+      "lbl_no_data_to_show": "无搜索结果",
+      "lbl_conf_nm": "配置名",
+      "lbl_revision": "版本",
+      "lbl_feature": "装备规格"
+    },
+    "staticLabels": {
+    },
+    "placeHolders": {
+    }
+  }
+}

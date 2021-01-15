@@ -1,0 +1,27 @@
+{
+  "title": "Import結果確認画面",
+  "caption": "",
+  "formModes": {
+    "mode1": "",
+    "mode2": "模式2"
+  },
+  "formLists": {
+  },
+  "formItems": {
+    "captionValues": {
+      "lbl_search_condition": "检索条件",
+      "txt_prj": "项目",
+      "btn_select": "选择",
+      "drl_revision": "改版",
+      "lbl_model_conf": "车辆规格",
+      "btn_add_model": "追加样式",
+      "lbl_diff": "差分",
+      "lbl_applied": "应用完毕",
+      "lbl_all": "全部"
+    },
+    "staticLabels": {
+    },
+    "placeHolders": {
+    }
+  }
+}

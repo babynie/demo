@@ -1,0 +1,21 @@
+{
+  "title": "お知らせ新規登録",
+  "caption": "",
+  "formModes": {
+    "mode1": ""
+  },
+  "formLists": {
+  },
+  "formItems": {
+    "captionValues": {
+      "lbl_news_register": "通知新登录",
+      "txt_news_detail": "通知内容",
+      "btn_register": "注册",
+      "btn_cancel": "取消"
+    },
+    "staticLabels": {
+    },
+    "placeHolders": {
+    }
+  }
+}
